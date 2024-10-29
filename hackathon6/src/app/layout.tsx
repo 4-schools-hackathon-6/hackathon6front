@@ -19,9 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${pretendard.variable}`}>
       <body
-        className={`${pretendard.variable} antialiased bg-gray-400 flex justify-center`}
+        className={`${pretendard.className} antialiased bg-gray-400 flex justify-center`}
       >
         <div className="max-w-[1440px] max-h-[3200px] bg-white w-[100vw] h-[100vh]">
           {children}
