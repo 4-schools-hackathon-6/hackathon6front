@@ -3,9 +3,10 @@ import { Backward2, Bicycle2, Kickboard, Scooter } from "../assets";
 
 interface PropsType {
   setPage: (number: number) => void;
+  setMobilitys: (mobility: "bicycle" | "scooter" | "kickboard") => void;
 }
 
-const Section1 = ({ setPage }: PropsType) => {
+const Section1 = ({ setPage, setMobilitys }: PropsType) => {
   const [mobility, setMobility] = useState({
     kickboard: false,
     bicycle: false,

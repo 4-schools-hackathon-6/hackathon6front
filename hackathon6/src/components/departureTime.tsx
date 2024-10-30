@@ -3,8 +3,8 @@ import { Bicycle2, Kickboard, Scooter } from "@/app/assets";
 import { useEffect, useState } from "react";
 
 interface PropsType {
-  hour: number;
-  min: number;
+  hour?: number;
+  min?: number;
   mobility: "kickboard" | "bicycle" | "scooter";
   className?: string;
   mode: "call" | "reservation";

@@ -29,7 +29,7 @@ export default function Reservation() {
       setTime={handleTime}
       setMobilitys={handleMobility}
     />,
-    <Section2 key={"1"} time={time} mobility={mobility} />,
+    <Section2 key={"1"} time={[0, 15]} mobility={mobility} />,
   ];
   return <div className="w-full h-full">{sections[page]}</div>;
 }
