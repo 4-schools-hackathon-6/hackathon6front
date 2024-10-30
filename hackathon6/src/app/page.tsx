@@ -1,7 +1,28 @@
+"use client";
 import { Logo, MainSection1, SmallTaxi, MainSection2, TabBar } from "./assets";
 import CallButton from "./CallButton";
+import { signIn } from "@/apis/user";
+import { useEffect } from "react";
+
+interface SignInType {
+  type: string;
+  token: string;
+  id: number;
+  email: string;
+  name: string;
+}
 
 export default function Home() {
+  const postSignIn = async () => {
+    const { data } = await signIn("wlals", "asdf1234");
+    localStorage.setItem("token", data.token);
+    return data;
+  };
+
+  useEffect(() => {
+    postSignIn();
+  }, []);
+
   return (
     <div className="flex flex-col">
       <div className="flex flex-col px-6 pt-3">
