@@ -1,4 +1,4 @@
-import { Logo, MainSection1, SmallTexi, MainSection2, TabBar } from "./assets";
+import { Logo, MainSection1, SmallTaxi, MainSection2, TabBar } from "./assets";
 import CallButton from "./CallButton";
 
 export default function Home() {
@@ -7,7 +7,7 @@ export default function Home() {
       <div className="flex flex-col px-6 pt-3">
         <Logo />
         <div className="flex border border-[#DFE1E6] w-full items-center font-bold rounded-[30px] px-4 py-2 gap-1">
-          <SmallTexi />
+          <SmallTaxi />
           <span className="text-[#909399]">어디로 갈까요?</span>
         </div>
       </div>

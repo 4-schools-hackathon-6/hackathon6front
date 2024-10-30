@@ -3,7 +3,7 @@ interface PropsType {
   size?: number;
 }
 
-export const SmallTexi = ({ className, size }: PropsType) => (
+export const SmallTaxi = ({ className, size }: PropsType) => (
   <svg
     width={size ?? "40"}
     height={size ?? "36"}
