@@ -65,6 +65,12 @@ const Section2 = ({ time, mobility }: PropsType) => {
     } else {
       alert("Geolocation을 지원하지 않는 브라우저입니다.");
     }
+  }, []);
+
+  useEffect(() => {
+    if (circleRef.current) {
+      circleRef.current.setRadius(radius);
+    }
   }, [radius]);
 
   return (

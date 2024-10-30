@@ -21,7 +21,7 @@ const Section1 = ({ setPage, setTime, setMobilitys }: PropsType) => {
   const { weakList } = useCalendar();
   const { hour, min, changeHour, changeMin } = useTimeInput(
     new Date().getHours(),
-    new Date().getMinutes()
+    new Date().getMinutes(),
   );
 
   const handleTouch = (day: number) => {
@@ -151,10 +151,10 @@ const Section1 = ({ setPage, setTime, setMobilitys }: PropsType) => {
         </div>
         <button
           className=" w-full bg-black font-bold text-[18px] text-white py-4 rounded-lg relative -bottom-52"
-          onClick={() => {
+          onClick={() =>
             (mobility.bicycle || mobility.kickboard || mobility.scooter) &&
-              setPage(1);
-          }}
+            setPage(1)
+          }
         >
           위치 설정하기
         </button>
