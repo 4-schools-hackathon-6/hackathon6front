@@ -19,7 +19,7 @@ const Section1 = ({ setPage }: PropsType) => {
   const { weakList } = useCalendar();
   const { hour, min, changeHour, changeMin } = useTimeInput(
     new Date().getHours(),
-    new Date().getMinutes()
+    new Date().getMinutes(),
   );
 
   const handleTouch = (day: number) => {
@@ -136,7 +136,10 @@ const Section1 = ({ setPage }: PropsType) => {
             아니요
           </button>
         </div>
-        <button className="bottom-8 w-full bg-black font-bold text-[18px] text-white py-4 rounded-lg relative -bottom-52">
+        <button
+          className=" w-full bg-black font-bold text-[18px] text-white py-4 rounded-lg relative -bottom-52"
+          onClick={() => setPage(1)}
+        >
           위치 설정하기
         </button>
       </div>
