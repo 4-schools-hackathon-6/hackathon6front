@@ -53,7 +53,7 @@ export const DepartureTime = ({
       diffHours > 0 ? `${diffHours.toString().padStart(2, "0")}시간` : ""
     } ${diffMinutes.toString().padStart(2, "0")}:${diffSec
       .toString()
-      .padStart(2, "0")}분 후`;
+      .padStart(2, "0")}초 후`;
   };
   return (
     <div className={`${className} bg-white w-full px-7 py-3 rounded-t-2xl`}>
