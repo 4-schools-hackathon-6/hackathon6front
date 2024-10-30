@@ -9,3 +9,6 @@ export * from "./bicycle2";
 export * from "./kickboard";
 export * from "./scooter";
 export * from "./backward2";
+export * from "./close";
+export * from "./plus";
+export * from "./resultImg";
