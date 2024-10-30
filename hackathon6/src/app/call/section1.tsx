@@ -59,7 +59,10 @@ const Section1 = ({ setPage }: PropsType) => {
           </button>
         </div>
       </div>
-      <button className="bg-black text-white py-4 rounded-lg font-semibold text-lg">
+      <button
+        className="bg-black text-white py-4 rounded-lg font-semibold text-lg"
+        onTouchEnd={() => setPage(1)}
+      >
         위치 설정하기
       </button>
     </div>
