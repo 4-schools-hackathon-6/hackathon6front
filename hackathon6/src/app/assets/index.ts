@@ -5,3 +5,6 @@ export * from "./bicycle";
 export * from "./main_section2";
 export * from "./tabBar";
 export * from "./backward";
+export * from "./bicycle2";
+export * from "./kickboard";
+export * from "./scooter";
