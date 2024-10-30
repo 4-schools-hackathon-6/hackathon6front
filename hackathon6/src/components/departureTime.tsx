@@ -1,6 +1,7 @@
 "use client";
 import { Bicycle2, Kickboard, Scooter } from "@/app/assets";
 import { useEffect, useState } from "react";
+import { reservation } from "@/apis/reservation";
 
 interface PropsType {
   hour?: number;
@@ -55,6 +56,15 @@ export const DepartureTime = ({
       .toString()
       .padStart(2, "0")}초 후`;
   };
+
+  const handleReservation = async () => {
+    reservation({ day: "1", time: "1", repeatition: true });
+  };
+
+  const handleCall = async () => {
+    
+  };
+
   return (
     <div className={`${className} bg-white w-full px-7 py-3 rounded-t-2xl`}>
       <div className="flex gap-2 items-end">
@@ -77,9 +87,18 @@ export const DepartureTime = ({
           : "출발 시각 30분 전 자동으로 콜서비스가 호출됩니다."}
       </span>
       <div className="flex justify-end font-bold text-[22px]">
-        {timeRemaining}
+        {mode === "reservation" ? (
+          `${hour}시간 ${min}분`
+        ) : (
+          <>
+            <input className="w-[30px]" placeholder="10"></input> 분 이후
+          </>
+        )}
       </div>
-      <button className="w-full bg-black text-white py-4 rounded-lg font-semibold text-lg">
+      <button
+        onClick={mode === "call" ? handleCall : handleReservation}
+        className="w-full bg-black text-white py-4 rounded-lg font-semibold text-lg"
+      >
         완료
       </button>
     </div>
