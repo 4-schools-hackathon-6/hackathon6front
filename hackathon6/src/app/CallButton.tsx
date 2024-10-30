@@ -1,12 +1,18 @@
+import { useRouter } from "next/navigation";
 import { Bicycle } from "./assets";
 
 interface PropsType {
   text?: string;
+  address: string;
 }
 
-const CallButton = ({ text }: PropsType) => {
+const CallButton = ({ text, address, }: PropsType) => {
+  const router = useRouter();
   return (
-    <div className="rounded-[10px] bg-[#f6f7f9] flex-col relative p-4 flex-grow h-[85px]">
+    <div
+      className="rounded-[10px] bg-[#f6f7f9] flex-col relative p-4 flex-grow h-[85px]"
+      onClick={() => router.push("/" + address)}
+    >
       <span className="font-semibold">{text}</span>
       <div className="flex relative">
         <div className="px-[6px] py-[4px] text-white bg-[#ff6700] rounded-sm before:absolute before:-top-1 before:left-4 before:bg-[#ff6700] before:w-2 before:h-2 before:rotate-45 text-[7px]">

@@ -1,8 +1,9 @@
 "use client";
+import CheckModal from "@/components/checkModal";
 import { Logo, MainSection1, SmallTaxi, MainSection2, TabBar } from "./assets";
 import CallButton from "./CallButton";
 import { signIn } from "@/apis/user";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface SignInType {
   type: string;
@@ -13,6 +14,7 @@ interface SignInType {
 }
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const postSignIn = async () => {
     const { data } = await signIn("wlals", "asdf1234");
     localStorage.setItem("token", data.token);
@@ -20,7 +22,9 @@ export default function Home() {
   };
 
   useEffect(() => {
+    const timer = setTimeout(() => setIsModalOpen(true), 10000);
     postSignIn();
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -34,11 +38,12 @@ export default function Home() {
       </div>
       <MainSection1 className="w-full" />
       <div className="flex px-5 justify-between gap-4">
-        <CallButton text="콜 하기" />
-        <CallButton text="예약 하기" />
+        <CallButton text="콜 하기" address="call" />
+        <CallButton text="예약 하기" address="reservation" />
       </div>
       <MainSection2 className="mt-2" />
       <TabBar />
+      {isModalOpen && <CheckModal setIsModalOpen={setIsModalOpen} />}
     </div>
   );
 }

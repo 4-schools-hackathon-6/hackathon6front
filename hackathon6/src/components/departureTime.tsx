@@ -1,7 +1,9 @@
 "use client";
 import { Bicycle2, Kickboard, Scooter } from "@/app/assets";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { reservation } from "@/apis/reservation";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 interface PropsType {
   hour?: number;
@@ -18,51 +20,52 @@ export const DepartureTime = ({
   className,
   mode,
 }: PropsType) => {
-  const [timeRemaining, setTimeRemaining] = useState("");
+  const router = useRouter();
+  // const [timeRemaining, setTimeRemaining] = useState("");
 
-  useEffect(() => {
-    setTimeRemaining(calculateTimeRemaining());
-    const interval = setInterval(() => {
-      setTimeRemaining(calculateTimeRemaining());
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [hour, min]);
+  // useEffect(() => {
+  //   setTimeRemaining(calculateTimeRemaining());
+  //   const interval = setInterval(() => {
+  //     setTimeRemaining(calculateTimeRemaining());
+  //   }, 1000);
+  //   return () => clearInterval(interval);
+  // }, [hour, min]);
 
-  const calculateTimeRemaining = () => {
-    const now = new Date();
-    let target = new Date();
+  // const calculateTimeRemaining = () => {
+  //   const now = new Date();
+  //   let target = new Date();
 
-    const daysToAdd = Math.floor(hour / 24);
-    const normalizedHour = hour % 24;
+  //   const daysToAdd = Math.floor(hour / 24);
+  //   const normalizedHour = hour % 24;
 
-    target.setHours(normalizedHour, min, 0);
+  //   target.setHours(normalizedHour, min, 0);
 
-    if (daysToAdd > 0) {
-      target.setDate(target.getDate() + daysToAdd);
+  //   if (daysToAdd > 0) {
+  //     target.setDate(target.getDate() + daysToAdd);
+  //   }
+
+  //   if (target < now) {
+  //     target.setDate(target.getDate() + 1);
+  //   }
+
+  //   const diffMs = target - now;
+  //   const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+  //   const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+  //   const diffSec = Math.floor((diffMs % (1000 * 60)) / 1000);
+
+  //   return `약 ${
+  //     diffHours > 0 ? `${diffHours.toString().padStart(2, "0")}시간` : ""
+  //   } ${diffMinutes.toString().padStart(2, "0")}:${diffSec
+  //     .toString()
+  //     .padStart(2, "0")}초 후`;
+  // };
+  let count = 0;
+  const handleSubmit = () => {
+    if (count > 0) {
+      toast.success("콜 서비스를 요청했습니다!");
+    router.push("/");
     }
-
-    if (target < now) {
-      target.setDate(target.getDate() + 1);
-    }
-
-    const diffMs = target - now;
-    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-    const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-    const diffSec = Math.floor((diffMs % (1000 * 60)) / 1000);
-
-    return `약 ${
-      diffHours > 0 ? `${diffHours.toString().padStart(2, "0")}시간` : ""
-    } ${diffMinutes.toString().padStart(2, "0")}:${diffSec
-      .toString()
-      .padStart(2, "0")}초 후`;
-  };
-
-  const handleReservation = async () => {
-    reservation({ day: "1", time: "1", repeatition: true });
-  };
-
-  const handleCall = async () => {
-    
+    count += 1
   };
 
   return (
@@ -88,7 +91,7 @@ export const DepartureTime = ({
       </span>
       <div className="flex justify-end font-bold text-[22px]">
         {mode === "reservation" ? (
-          `${hour}시간 ${min}분`
+          `${hour}시 ${min}분`
         ) : (
           <>
             <input className="w-[30px]" placeholder="10"></input> 분 이후
@@ -96,7 +99,7 @@ export const DepartureTime = ({
         )}
       </div>
       <button
-        onClick={mode === "call" ? handleCall : handleReservation}
+        onClick={() => handleSubmit()}
         className="w-full bg-black text-white py-4 rounded-lg font-semibold text-lg"
       >
         완료
