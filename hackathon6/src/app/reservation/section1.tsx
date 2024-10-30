@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useCalendar from "@/hooks/useCalendar";
 import { Backward, Bicycle2, Kickboard, Scooter } from "../assets";
 import useTimeInput from "@/hooks/useInput";
 
 interface PropsType {
   setPage: (number: number) => void;
+  setTime: (hour: number, min: number) => void;
+  setMobilitys: (mobility: "bicycle" | "scooter" | "kickboard") => void;
 }
 
-const Section1 = ({ setPage }: PropsType) => {
+const Section1 = ({ setPage, setTime, setMobilitys }: PropsType) => {
   const [selectDate, setSelectDate] = useState<null | number>(null);
   const [mobility, setMobility] = useState({
     kickboard: false,
@@ -19,12 +21,23 @@ const Section1 = ({ setPage }: PropsType) => {
   const { weakList } = useCalendar();
   const { hour, min, changeHour, changeMin } = useTimeInput(
     new Date().getHours(),
-    new Date().getMinutes(),
+    new Date().getMinutes()
   );
 
   const handleTouch = (day: number) => {
     setSelectDate(day);
   };
+
+  useEffect(() => {
+    setTime(hour, min);
+  }, [hour, min]);
+
+  useEffect(() => {
+    mobility.bicycle && setMobilitys("bicycle");
+    mobility.kickboard && setMobilitys("kickboard");
+    mobility.scooter && setMobilitys("scooter");
+  }, [mobility]);
+
   return (
     <div className="flex flex-col bg-[#282a2d] h-full font-black">
       <div className="pt-10 px-7 flex flex-col gap-4">
@@ -138,7 +151,10 @@ const Section1 = ({ setPage }: PropsType) => {
         </div>
         <button
           className=" w-full bg-black font-bold text-[18px] text-white py-4 rounded-lg relative -bottom-52"
-          onClick={() => setPage(1)}
+          onClick={() => {
+            (mobility.bicycle || mobility.kickboard || mobility.scooter) &&
+              setPage(1);
+          }}
         >
           위치 설정하기
         </button>

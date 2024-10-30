@@ -12,3 +12,4 @@ export * from "./backward2";
 export * from "./close";
 export * from "./plus";
 export * from "./resultImg";
+export * from "./coin";
