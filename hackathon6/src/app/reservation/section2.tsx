@@ -1,27 +1,43 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const Section2 = () => {
+  const mapRef = useRef<naver.maps.Map | null>(null);
+  const markerRef = useRef<naver.maps.Marker | null>(null);
+  const circleRef = useRef<naver.maps.Circle | null>(null);
+
   const initMap = (x: number, y: number) => {
     const map = new naver.maps.Map("map", {
       center: new naver.maps.LatLng(x, y),
-      zoom: 15,
+      zoom: 17.5,
     });
 
-    new naver.maps.Marker({
+    const marker = new naver.maps.Marker({
       position: new naver.maps.LatLng(x, y),
       map: map,
     });
 
-    new naver.maps.Circle({
+    const circle = new naver.maps.Circle({
       map: map,
       center: new naver.maps.LatLng(x, y),
-      radius: 500,
+      radius: 50,
       strokeColor: "#FF6700",
       strokeOpacity: 0.5,
       strokeWeight: 1.5,
       fillColor: "#FF6700",
       fillOpacity: 0.18,
+    });
+
+    mapRef.current = map;
+    markerRef.current = marker;
+    circleRef.current = circle;
+
+    naver.maps.Event.addListener(map, "center_changed", () => {
+      const newCenter = map.getCenter();
+      if (markerRef.current && circleRef.current) {
+        markerRef.current.setPosition(newCenter);
+        circleRef.current.setCenter(newCenter);
+      }
     });
   };
 
@@ -42,11 +58,7 @@ const Section2 = () => {
     }
   }, []);
 
-  return (
-    <>
-      <div id="map" className="h-[879px]"></div>
-    </>
-  );
+  return <div id="map" className="h-[879px]"></div>;
 };
 
 export default Section2;
