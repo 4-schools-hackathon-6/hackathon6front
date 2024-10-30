@@ -23,7 +23,7 @@ export default function RootLayout({
       <body
         className={`${pretendard.className} antialiased bg-gray-400 flex justify-center`}
       >
-        <div className="max-w-[1440px] max-h-[3200px] bg-white w-[100vw] h-[100vh]">
+        <div className="max-w-[1440px] max-h-[3200px] text-black bg-white w-[100vw] h-[100vh]">
           {children}
         </div>
       </body>
